@@ -70,24 +70,29 @@ for _, prototype in pairs(locomotives) do
     loco.burner = nuclear_burner
     loco.weight = source_loco.weight
     loco.max_power = "3MW"
+    loco.braking_force = loco.braking_force + 2
+    table.insert(recipe[loco.name].ingredients, { "electronic-components", 200 })
   elseif string.sub(prototype, -1) == "3" then
     -- insert fusion energy source
     loco.burner = fusion_burner
     loco.weight = loco.weight + 10000
     loco.max_power = "4MW"
-    -- recipe[prototype].ingredients = recipe[fusion.name].ingredients
+    loco.braking_force = loco.braking_force + 3
+    table.insert(recipe[loco.name].ingredients, { "fusion-reactor-equipment", 1 })
   elseif string.sub(prototype, -1) == "4" then
     -- inser antimatter energy source
     loco.burner = antimatter_burner
     loco.weight = loco.weight + 10000
     loco.max_power = "6MW"
-    -- recipe[prototype].ingredients = recipe[antimatter.name].ingredients
+    loco.braking_force = loco.braking_force + 5
+    table.insert(recipe[loco.name].ingredients, { "antimatter-reactor-equipment", 1 })
   elseif string.sub(prototype, -1) == "5" then
     -- inser antimatter energy source
     loco.burner = antimatter_burner
     loco.weight = loco.weight + 10000
     loco.max_power = "6MW"
-    -- recipe[prototype].ingredients = recipe[antimatter.name].ingredients
+    loco.braking_force = loco.braking_force + 6
+    table.insert(recipe[loco.name].ingredients, { "antimatter-reactor-equipment", 2 })
   end
   data.raw["locomotive"][prototype] = loco
 end
@@ -125,6 +130,7 @@ for _, tech_name in pairs(angel_techs) do
     table.insert(technology[tech_name].prerequisites, "kr-nuclear-locomotive")
     technology[tech_name].unit.ingredients =
         util.table.deepcopy(technology["nuclear-power"].unit.ingredients)
+    table.insert(technology[tech_name].unit.ingredients, { "production-science-pack", 1 })
   elseif string.sub(tech_name, -1) == "3" then
     table.insert(technology[tech_name].prerequisites, "fusion-reactor-equipment")
     technology[tech_name].unit.ingredients =
