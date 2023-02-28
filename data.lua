@@ -123,7 +123,7 @@ local angel_techs = {
   petrotrain_tier_amount >= 4 and "angels-petro-train-4" or nil,
   petrotrain_tier_amount >= 5 and "angels-petro-train-5" or nil,
 
-}--
+} --
 -- adjust ingredients
 for _, tech_name in pairs(angel_techs) do
   if string.sub(tech_name, -1) == "2" then
@@ -191,19 +191,27 @@ local wagons = {
   crawlertrain_tier_amount >= 5 and "crawler-bot-wagon-5" or nil,
 }
 
-if option~=nil then
+if option ~= nil then
   for key, prototype in pairs(wagons) do
     local wagon = data.raw["cargo-wagon"][prototype]
     if string.sub(prototype, -1) == "2" then
-      wagon.inventory_size=option[2]
+      wagon.inventory_size = option[2]
     elseif string.sub(prototype, -1) == "3" then
-      wagon.inventory_size=option[3]
+      wagon.inventory_size = option[3]
     elseif string.sub(prototype, -1) == "4" then
-      wagon.inventory_size=option[4]
+      wagon.inventory_size = option[4]
     elseif string.sub(prototype, -1) == "5" then
-      wagon.inventory_size=option[5]
+      wagon.inventory_size = option[5]
     else
-      wagon.inventory_size=option[1]
+      wagon.inventory_size = option[1]
     end
   end
+end
+
+-- adjust item group when Schall Transport Group is installed
+
+if mods["SchallTransportGroup"] then
+  data.raw["item-subgroup"]["angels-vehicle-train-crawler"].group = "transport"
+  data.raw["item-subgroup"]["angels-petrotrain"].group = "transport"
+  data.raw["item-subgroup"]["angels-smeltingtrain"].group = "transport"
 end

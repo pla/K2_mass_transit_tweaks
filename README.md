@@ -12,3 +12,5 @@ Optional adjustment of the cargo wagon Inventory
 * Option 1: 20,30,40,50,60 stacks
 * Option 2: 40,45,50,55,60 stack
 * Untouched: 60 - 156 stacks
+
+Adjusted item subgroups when [Schall Tranport Group](https://mods.factorio.com/mod/SchallTransportGroup) is installed
