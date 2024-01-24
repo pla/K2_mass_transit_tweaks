@@ -30,6 +30,13 @@ fusion_burner.fuel_category = "fusion-fuel"
 local antimatter_burner = util.table.deepcopy(nuclear_burner) --[[@as LuaBurnerPrototype]]
 antimatter_burner.fuel_category = "antimatter-fuel"
 
+-- Realistic Fusion Power adjustments
+if settings.startup["rfp-replace-krastorio"].value then
+  fusion_burner.fuel_category = "rfp-equipment"
+  if settings.startup["rfp-antimatter"].value then
+    antimatter_burner.fuel_category = "rfp-matter-antimatter"
+  end
+end
 --edit angels
 local locomotives = {
   -- crawlertrain_tier_amount >= 1 and "crawler-locomtive" or nil,

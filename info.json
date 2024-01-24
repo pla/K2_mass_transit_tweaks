@@ -1,6 +1,6 @@
 {
   "name": "K2_mass_transit_tweaks",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "factorio_version": "1.1",
   "title": "Krastorio 2 tweaks for Angel's Addons - Mass Transit",
   "author": "EvilPLa",
@@ -9,7 +9,8 @@
     "base >= 1.1.0",
     "angelsaddons-mobility >= 0.0.11",
     "Krastorio2",
-    "? SchallTransportGroup"
+    "? SchallTransportGroup",
+    "? RealisticFusionPower"
   ],
   "description": "This mod configures the higher tier locomotives to use the different fuels available in Krastorio 2. Optional the cargo wagon inventory can be adjusted"
 }
