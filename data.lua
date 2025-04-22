@@ -21,21 +21,21 @@ cargo-wagon
 ]]
 --get source
 local source_loco = data.raw["locomotive"]["kr-nuclear-locomotive"]
-local fusion_fuel = data.raw["fuel-category"]["fusion"]
-local antimatter_fuel = data.raw["fuel-category"]["antimatter"]
+-- local fusion_fuel = data.raw["fuel-category"]["fusion"]
+-- local antimatter_fuel = data.raw["fuel-category"]["antimatter"]
 
 local nuclear_burner = source_loco.energy_source
-local fusion_burner = util.table.deepcopy(nuclear_burner) --[[@class LuaBurnerEnergySource]]
-fusion_burner.fuel_category = "fusion-fuel"
-local antimatter_burner = util.table.deepcopy(nuclear_burner) --[[@class LuaBurnerEnergySource]]
-antimatter_burner.fuel_category = "antimatter-fuel"
+local fusion_burner = util.table.deepcopy(nuclear_burner) --[[@class data.BurnerEnergySource]]
+fusion_burner.fuel_categories = {"fusion-fuel"}
+local antimatter_burner = util.table.deepcopy(nuclear_burner) --[[@class data.BurnerEnergySource]]
+antimatter_burner.fuel_categories = {"antimatter-fuel"}
 
 if mods["RealisticFusionPower"] then
   -- Realistic Fusion Power adjustments
   if settings.startup["rfp-replace-krastorio"].value then
-    fusion_burner.fuel_category = "rfp-equipment"
+    fusion_burner.fuel_categories = {"rfp-equipment"}
     if settings.startup["rfp-antimatter"].value then
-      antimatter_burner.fuel_category = "rfp-matter-antimatter"
+      antimatter_burner.fuel_categories = {"rfp-matter-antimatter"}
     end
   end
 end
@@ -81,28 +81,28 @@ for _, prototype in pairs(locomotives) do
     loco.weight = source_loco.weight
     loco.max_power = "3MW"
     loco.braking_force = loco.braking_force + 3
-    table.insert(recipe[loco.name].ingredients, { "electronic-components", 200 })
+    table.insert(recipe[loco.name].ingredients, {type = "item", name = "kr-electronic-components", amount = 200 })
   elseif string.sub(prototype, -1) == "3" then
     -- insert fusion energy source
-    loco.energy_source = fusion_burner --[[@class LuaBurnerEnergySource]]
+    loco.energy_source = fusion_burner --[[@class data.BurnerEnergySource]]
     loco.weight = loco.weight + 10000
     loco.max_power = "4MW"
     loco.braking_force = loco.braking_force * 2.5
-    table.insert(recipe[loco.name].ingredients, { "fusion-reactor-equipment", 1 })
+    table.insert(recipe[loco.name].ingredients, {type = "item", name =  "kr-fusion-reactor-equipment", amount = 1 })
   elseif string.sub(prototype, -1) == "4" then
     -- inser antimatter energy source
-    loco.energy_source = antimatter_burner --[[@class LuaBurnerEnergySource]]
+    loco.energy_source = antimatter_burner --[[@class data.BurnerEnergySource]]
     loco.weight = loco.weight + 10000
     loco.max_power = "6MW"
     loco.braking_force = loco.braking_force * 2.5
-    table.insert(recipe[loco.name].ingredients, { "antimatter-reactor-equipment", 1 })
+    table.insert(recipe[loco.name].ingredients, {type = "item", name =  "kr-antimatter-reactor-equipment", amount = 1 })
   elseif string.sub(prototype, -1) == "5" then
     -- inser antimatter energy source
-    loco.energy_source = antimatter_burner --[[@class LuaBurnerEnergySource]]
+    loco.energy_source = antimatter_burner --[[@class data.BurnerEnergySource]]
     loco.weight = loco.weight + 10000
     loco.max_power = "6MW"
     loco.braking_force = loco.braking_force * 2.5
-    table.insert(recipe[loco.name].ingredients, { "antimatter-reactor-equipment", 2 })
+    table.insert(recipe[loco.name].ingredients, {type = "item", name =  "kr-antimatter-reactor-equipment", amount = 2 })
   end
   data.raw["locomotive"][prototype] = loco
 end
