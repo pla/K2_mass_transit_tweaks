@@ -140,7 +140,7 @@ for _, tech_name in pairs(angel_techs) do
     table.insert(technology[tech_name].prerequisites, "kr-nuclear-locomotive")
     technology[tech_name].unit.ingredients =
         util.table.deepcopy(technology["nuclear-power"].unit.ingredients)
-    table.insert(technology[tech_name].unit.ingredients, {type ="item", name = "production-science-pack", amount = 1 })
+    table.insert(technology[tech_name].unit.ingredients, {"production-science-pack", 1 })
   elseif string.sub(tech_name, -1) == "3" then
     table.insert(technology[tech_name].prerequisites, "fission-reactor-equipment")
     technology[tech_name].unit.ingredients =
