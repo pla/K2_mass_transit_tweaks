@@ -21,14 +21,12 @@ cargo-wagon
 ]]
 --get source
 local source_loco = data.raw["locomotive"]["kr-nuclear-locomotive"]
--- local fusion_fuel = data.raw["fuel-category"]["fusion"]
--- local antimatter_fuel = data.raw["fuel-category"]["antimatter"]
 
 local nuclear_burner = source_loco.energy_source
 local fusion_burner = util.table.deepcopy(nuclear_burner) --[[@class data.BurnerEnergySource]]
-fusion_burner.fuel_categories = {"fusion-fuel"}
+fusion_burner.fuel_categories = {"kr-fusion-fuel"}
 local antimatter_burner = util.table.deepcopy(nuclear_burner) --[[@class data.BurnerEnergySource]]
-antimatter_burner.fuel_categories = {"antimatter-fuel"}
+antimatter_burner.fuel_categories = {"kr-antimatter-fuel"}
 
 if mods["RealisticFusionPower"] then
   -- Realistic Fusion Power adjustments
@@ -142,9 +140,9 @@ for _, tech_name in pairs(angel_techs) do
         util.table.deepcopy(technology["nuclear-power"].unit.ingredients)
     table.insert(technology[tech_name].unit.ingredients, {"production-science-pack", 1 })
   elseif string.sub(tech_name, -1) == "3" then
-    table.insert(technology[tech_name].prerequisites, "fission-reactor-equipment")
+    table.insert(technology[tech_name].prerequisites, "kr-fusion-reactor-equipment")
     technology[tech_name].unit.ingredients =
-        util.table.deepcopy(technology["fission-reactor-equipment"].unit.ingredients)
+        util.table.deepcopy(technology["kr-fusion-reactor-equipment"].unit.ingredients)
   elseif string.sub(tech_name, -1) == "4" then
     table.insert(technology[tech_name].prerequisites, "kr-antimatter-reactor-equipment")
     technology[tech_name].unit.ingredients =
